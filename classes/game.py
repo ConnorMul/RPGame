@@ -62,7 +62,7 @@ class Person:
         i = 1
         print("Actions")
         for action in self.actions:
-            print(str(i) + ":", action)
+            print(str(i) + ": " + action)
             i += 1
 
     def choose_magic(self):
