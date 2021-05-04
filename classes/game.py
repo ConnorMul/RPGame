@@ -1,5 +1,5 @@
 import random
-
+import pprint
 class bColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -12,7 +12,7 @@ class bColors:
 
 class Person:
 
-    def __init__(self, hp, mp, atk, df, magic):
+    def __init__(self, hp, mp, atk, df, magic, items):
         self.maxhp = hp
         self.hp = hp
         self.maxmp = mp
@@ -21,21 +21,20 @@ class Person:
         self.atkh = atk + 10
         self.df = df
         self.magic = magic
-        self.actions = ["Attack", "Magic"]
+        self.items = items
+        self.actions = ["Attack", "Magic", "Items"]
 
     def generate_damage(self):
         return random.randrange(self.atkl, self.atkh)
-
-    def generate_spell_damage(self, i):
-        mgl = self.magic[i]["dmg"] - 5
-        mgh = self.magic[i]["dmg"] + 5
-        return random.randrange(mgl, mgh)
 
     def take_damage(self, dmg):
         self.hp -= dmg
         if self.hp < 0:
             self.hp = 0
         return self.hp
+    
+    def heal(self, amt):
+        self.hp += amt
 
     def get_hp(self):
         return self.hp
@@ -53,21 +52,28 @@ class Person:
         self.mp -= cost
 
     def get_spell_name(self, i):
-        return self.magic[i]["name"]
+        return self.magic[i].name
 
     def get_spell_mp_cost(self, i):
-        return self.magic[i]["cost"]
+        return self.magic[i].cost
 
     def choose_action(self):
         i = 1
-        print("Actions")
+        print("\n" + "Actions")
         for action in self.actions:
-            print(str(i) + ": " + action)
+            print("    " + str(i) + ": " + action)
             i += 1
 
     def choose_magic(self):
         i = 1
-        print("Magic")
+        print("\n" + "Magic")
         for spell in self.magic:
-            print(str(i) + ":", spell["name"], "(cost:", str(spell["dmg"]) + ")")
+            print("    " + str(i) + ":", spell.name, "(cost:", str(spell.cost) + ")")
+            i += 1
+            
+    def choose_item(self):
+        i = 1
+        print("\n" + "Items")
+        for item in self.items:
+            print("    " + str(i) + ":", item.name + " - ", item.description, "(x5)")
             i += 1
