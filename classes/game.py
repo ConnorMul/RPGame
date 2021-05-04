@@ -40,13 +40,13 @@ class Person:
     def get_hp(self):
         return self.hp
 
-    def get_maxhp(self):
+    def get_max_hp(self):
         return self.maxhp
 
     def get_mp(self):
         return self.mp
 
-    def get_maxmp(self):
+    def get_max_mp(self):
         return self.maxmp
 
     def reduce_mp(self, cost):
@@ -69,5 +69,5 @@ class Person:
         i = 1
         print("Magic")
         for spell in self.magic:
-            print(str(i) + ":", spell["name"], "(cost:", str(spell["mp"]) + ")")
+            print(str(i) + ":", spell["name"], "(cost:", str(spell["dmg"]) + ")")
             i += 1
